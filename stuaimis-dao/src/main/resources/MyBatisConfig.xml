@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+	<!-- 自定义类型别名 -->
+	<typeAliases>
+		<package name="com.ks.stuaimis.pojo"/>
+	</typeAliases>
+
+
+	<!-- 分页插件 -->
+	<plugins>
+		<plugin interceptor="com.github.pagehelper.PageHelper">
+			<!-- 设置数据库类型 Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库 -->
+			<property name="dialect" value="mysql" />
+			<!-- 设置为true时，使用RowBounds分页会进行count查询 -->
+			<property name="rowBoundsWithCount" value="true" />
+		</plugin>
+	</plugins>
+	
+	<environments default="MySqlEnv">
+		<environment id="MySqlEnv">
+			<!-- 事务管理 -->
+			<transactionManager type="JDBC"></transactionManager>
+			<!-- 数据源配置 -->
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url" value="jdbc:mysql://127.0.0.1:3306/y2_test?useUnicode=true&amp;characterEncoding=UTF-8&amp;allowMultiQueries=true" />
+				<property name="username" value="root" />
+				<property name="password" value="yesheng" />
+				<property name="poolMaximumActiveConnections" value="20"/>
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<mappers>
+	    <mapper resource="mapping/IPersonDao.xml" />
+	</mappers>
+
+</configuration>
